@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>現在時間</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            font-family: "Microsoft JhengHei", "PingFang TC", sans-serif;
+        }
+        .container {
+            text-align: center;
+            color: #fff;
+        }
+        .time {
+            font-size: 5rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+        }
+        .date {
+            font-size: 2rem;
+            margin-top: 1rem;
+            opacity: 0.9;
+            letter-spacing: 0.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="time" id="time"></div>
+        <div class="date" id="date"></div>
+    </div>
+    <script>
+        const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+        const months = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
+
+        function updateTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            document.getElementById('time').textContent = `${hours}:${minutes}:${seconds}`;
+            
+            const year = now.getFullYear();
+            const month = months[now.getMonth()];
+            const day = now.getDate();
+            const weekday = weekdays[now.getDay()];
+            
+            document.getElementById('date').textContent = `${year}年${month}${day}日 ${weekday}`;
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>
